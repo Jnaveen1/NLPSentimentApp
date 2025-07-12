@@ -19,7 +19,6 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-from textblob import TextBlob 
 
 
 def get_wordnet_pos(tag):
@@ -48,11 +47,9 @@ def preprocess(text):
     return " ".join(lemmatized)
 
 def analyze_sentiment(text):
-    # blob = TextBlob(text) 
     analyzer = SentimentIntensityAnalyzer()
     score = analyzer.polarity_scores(text)
     compound = score['compound'] 
-    # polarity = blob.sentiment.polarity 
 
     if compound >= 0.5 :
         return "Positive 😊"
@@ -61,17 +58,6 @@ def analyze_sentiment(text):
     else :
         return "Neutral 😐" 
 
-# while(True):
-#     confirm = input("Do you want to analyze a sentence? (yes/no): ").strip().lower()
-#     if confirm == 'yes':
-#         user_input = input("Enter a sentence: ") 
-#         cleaned_input = preprocess(user_input)
-#         result = analyze_sentiment(cleaned_input)
-#         print("Original Text:", user_input)
-#         print("Cleaned Text:", cleaned_input)
-#         print("Sentiment Analysis Result:", result)
-#     else :
-#         break 
 
 st.title("🧠 NLP Sentiment Analyzer")
 st.write("Enter a sentence to check the mood!")
